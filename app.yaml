@@ -1,0 +1,11 @@
+application: pipes-1038 
+version: 2
+runtime: go
+api_version: go1
+
+handlers:
+- url: /.*
+  script: _go_app
+
+env_variables:
+    TEST: 'it can print env variables'
