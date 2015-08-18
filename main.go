@@ -59,6 +59,7 @@ type Message struct {
 
 // GetConfiguration return the config for the app
 func GetConfiguration() *Configuration {
+
 	config := &Configuration{}
 	filename := os.Getenv("CONFIG_FILE")
 	if filename == "" {
@@ -76,18 +77,18 @@ func GetConfiguration() *Configuration {
 // GetApplication returns a monorail application
 func GetApplication() *monorail.Monorail {
 	var (
-		app    *monorail.Monorail
-		rndr   *render.Render
-		mongo  *mgo.Session
-		config *Configuration
-		db     *mgo.Database
-		err    error
+		app     *monorail.Monorail
+		rndr    *render.Render
+		session *mgo.Session
+		config  *Configuration
+		db      *mgo.Database
+		err     error
 	)
 	config = GetConfiguration()
 	app = monorail.New()
 	rndr = render.New(render.Options{Extensions: []string{".html"}})
-	mongo, err = mgo.Dial(config.TIGER_READER_MONGODB_URL)
-	db = mongo.DB(config.TIGER_READER_MONGODB_DB)
+	session, err = mgo.Dial(config.TIGER_READER_MONGODB_URL)
+	db = session.DB(config.TIGER_READER_MONGODB_DB)
 	FatalOnError(err)
 	app.Injector().Register(rndr)
 	app.Injector().Register(db)

@@ -23,6 +23,9 @@ api_version: go1
 handlers:
 - url: /.*
   script: _go_app
+  # public files are handled by public directory
+- url: /public
+  static_dir: public
 
 env_variables:
     CONFIG_FILE: './.secret.yaml'
