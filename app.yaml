@@ -16,7 +16,7 @@
 #    along with this program.  If not, see <http:#www.gnu.org/licenses/>
 
 application: pipes-1038 
-version: 2
+version: 1
 runtime: go
 api_version: go1
 
